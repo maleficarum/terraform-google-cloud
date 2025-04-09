@@ -75,3 +75,11 @@ jobs:
             - name: Create Terraform documentation 
               run: terraform-docs markdown . >> $GITHUB_STEP_SUMMARY
               shell: bash
+
+            - name: 'Terragrunt Init'
+              run: cd ${GITHUB_WORKSPACE}/environments/${environment} && terragrunt run-all init
+              shell: bash
+
+            - name: 'Terragrunt Plan'
+              run: cd ${GITHUB_WORKSPACE}/environments/${environment} && terragrunt run-all plan
+              shell: bash                  

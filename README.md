@@ -124,6 +124,4 @@ To remove all deployed resources:
 ```bash
 terraform destroy
 ```
-
-
 🚀 Happy Infrastructure Building! 🚀

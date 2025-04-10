@@ -22,9 +22,9 @@ public_compute_instance = {
   zone = "northamerica-south1-c"
   storage = {
     size = 20
-    image = "projects/debian-cloud/global/images/debian-12-bookworm-v20250311"
+    image = "projects/challenges-456002/global/images/sinformex-nginx-image"
   },
-  tags = ["ssh-access"]
+  tags = ["ssh-access", "http-access"]
 }
 
 private_compute_instance = {
@@ -33,6 +33,6 @@ private_compute_instance = {
   zone = "northamerica-south1-c"
   storage = {
     size = 20
-    image = "projects/debian-cloud/global/images/debian-12-bookworm-v20250311"
+    image = "projects/challenges-456002/global/images/sinformex-nginx-image"
   }
 }

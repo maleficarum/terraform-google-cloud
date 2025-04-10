@@ -73,7 +73,7 @@ jobs:
                 body: ${{ steps.tag_version.outputs.changelog }}    
 
             - name: Create Terraform documentation 
-              run: terraform-docs markdown . >> $GITHUB_STEP_SUMMARY
+              run: terraform-docs markdown . --recursive=true >> $GITHUB_STEP_SUMMARY
               shell: bash
 
             - name: 'Terragrunt Init'

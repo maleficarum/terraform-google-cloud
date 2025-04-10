@@ -73,7 +73,11 @@ jobs:
                 body: ${{ steps.tag_version.outputs.changelog }}    
 
             - name: Create Terraform documentation 
-              run: terraform-docs markdown . --recursive=true --output-file=DOCS.md && cat DOCS.md >> $GITHUB_STEP_SUMMARY && rm DOCS.md
+              run: terraform-docs markdown . --recursive=true --output-file=DOCS.md && rm DOCS.md
+              shell: bash
+
+            - name: Complement summary
+              run: cat modules/compute/README.md >> $GITHUB_STEP_SUMMARY && cat modules/network/README.md >> $GITHUB_STEP_SUMMARY
               shell: bash
 
             - name: 'Terragrunt Init'

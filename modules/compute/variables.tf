@@ -1,3 +1,4 @@
+# tflint-ignore: terraform_unused_declarations
 variable "public_subnetwork" {
   type        = string
   description = "Public Subnetwork to target the deployment"
@@ -21,6 +22,7 @@ variable "private_compute_instance" {
   })
 }
 
+# tflint-ignore: terraform_unused_declarations
 variable "public_compute_instance" {
   description = "Compute instance definition"
   type = object({
@@ -38,4 +40,10 @@ variable "public_compute_instance" {
 variable "service_account" {
   type = string
   description = "Service Account"
+}
+
+# tflint-ignore: terraform_unused_declarations
+variable "vpc" {
+  type = string
+  description = "VPC"
 }

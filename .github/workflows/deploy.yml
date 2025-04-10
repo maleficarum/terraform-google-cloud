@@ -1,4 +1,8 @@
 name: On pull request
+env:
+  TF_VAR_service_account:  ${{ secrets.SERVICE_ACCOUNT }}
+  TF_VAR_project: ${{secrets.GCP_PROJECT }}
+  environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
 
 on:
     push:

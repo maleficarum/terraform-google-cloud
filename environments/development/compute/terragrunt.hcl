@@ -54,10 +54,12 @@ dependency "network" {
   mock_outputs = {
     private_subnetwork = "1"
     public_subnetwork = "1"
+    vpc = "1"
   }  
 }
 
 inputs = {
   private_subnetwork = dependency.network.outputs.private_subnetwork
   public_subnetwork  = dependency.network.outputs.public_subnetwork
+  vpc = dependency.network.outputs.vpc
 }

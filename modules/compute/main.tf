@@ -10,7 +10,7 @@ resource "google_compute_instance" "private_compute_instance" {
     initialize_params {
       image = var.private_compute_instance.storage.image
       size  = var.private_compute_instance.storage.size
-      type  = "pd-balanced"
+      type  = "pd-standard"
     }
 
     mode = "READ_WRITE"

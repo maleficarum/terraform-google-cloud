@@ -1,5 +1,5 @@
 resource "google_dns_managed_zone" "default" {
-   name          = "mmm com"
+   name          = "mmmcom"
    dns_name      = "mmm.com."
    description   = "lyfedge Public DNS zone"
    force_destroy = "true"

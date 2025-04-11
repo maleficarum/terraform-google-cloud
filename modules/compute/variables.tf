@@ -12,9 +12,9 @@ variable "private_subnetwork" {
 variable "private_compute_instance" {
   description = "Compute instance definition"
   type = object({
-    name            = string
-    machine_type    = string
-    zone            = string
+    name         = string
+    machine_type = string
+    zone         = string
     storage = object({
       size  = number
       image = string
@@ -26,9 +26,9 @@ variable "private_compute_instance" {
 variable "public_compute_instance" {
   description = "Compute instance definition"
   type = object({
-    name            = string
-    machine_type    = string
-    zone            = string
+    name         = string
+    machine_type = string
+    zone         = string
     storage = object({
       size  = number
       image = string
@@ -38,12 +38,12 @@ variable "public_compute_instance" {
 }
 
 variable "service_account" {
-  type = string
+  type        = string
   description = "Service Account"
 }
 
 # tflint-ignore: terraform_unused_declarations
 variable "vpc" {
-  type = string
+  type        = string
   description = "VPC"
 }

@@ -9,6 +9,6 @@ output "public_subnetwork" {
 }
 
 output "vpc" {
-  value = google_compute_network.main_vpc.id
+  value       = google_compute_network.main_vpc.id
   description = "VPC"
 }

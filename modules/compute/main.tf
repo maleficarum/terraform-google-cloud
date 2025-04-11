@@ -1,5 +1,6 @@
 resource "google_compute_instance" "private_compute_instance" {
   tags = var.public_compute_instance.tags
+
   metadata = {
     ssh-keys = "ivan:${file("~/.ssh/id_rsa.pub")}"
   }
@@ -45,15 +46,15 @@ resource "google_compute_instance" "private_compute_instance" {
   }
 
   service_account {
-    email  = var.service_account
+    email = var.service_account
     scopes = [
-        "https://www.googleapis.com/auth/devstorage.read_only", 
-        "https://www.googleapis.com/auth/logging.write", 
-        "https://www.googleapis.com/auth/monitoring.write", 
-        "https://www.googleapis.com/auth/service.management.readonly", 
-        "https://www.googleapis.com/auth/servicecontrol", 
-        "https://www.googleapis.com/auth/trace.append",
-        "cloud-platform"]
+      "https://www.googleapis.com/auth/devstorage.read_only",
+      "https://www.googleapis.com/auth/logging.write",
+      "https://www.googleapis.com/auth/monitoring.write",
+      "https://www.googleapis.com/auth/service.management.readonly",
+      "https://www.googleapis.com/auth/servicecontrol",
+      "https://www.googleapis.com/auth/trace.append",
+    "cloud-platform"]
   }
 
   shielded_instance_config {
@@ -116,15 +117,15 @@ resource "google_compute_instance" "public_compute_instance" {
   }
 
   service_account {
-    email  = var.service_account
+    email = var.service_account
     scopes = [
-        "https://www.googleapis.com/auth/devstorage.read_only", 
-        "https://www.googleapis.com/auth/logging.write", 
-        "https://www.googleapis.com/auth/monitoring.write", 
-        "https://www.googleapis.com/auth/service.management.readonly", 
-        "https://www.googleapis.com/auth/servicecontrol", 
-        "https://www.googleapis.com/auth/trace.append",
-        "cloud-platform"]
+      "https://www.googleapis.com/auth/devstorage.read_only",
+      "https://www.googleapis.com/auth/logging.write",
+      "https://www.googleapis.com/auth/monitoring.write",
+      "https://www.googleapis.com/auth/service.management.readonly",
+      "https://www.googleapis.com/auth/servicecontrol",
+      "https://www.googleapis.com/auth/trace.append",
+    "cloud-platform"]
   }
 
   shielded_instance_config {

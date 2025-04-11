@@ -2,6 +2,7 @@ resource "google_compute_instance_group" "private_group" {
   name      = "staging-instance-group"
   zone      = var.public_compute_instance.zone
   instances = [ google_compute_instance.private_compute_instance.id ]
+
   named_port {
     name = "http"
     port = "80"
@@ -20,14 +21,14 @@ resource "google_compute_instance_group" "private_group" {
 resource "google_compute_http_health_check" "default" {
   name               = "web-health-check"
   request_path       = "/"
-  check_interval_sec = 5
+  check_interval_sec = 60
   timeout_sec        = 5
 }
 
 resource "google_compute_backend_service" "default" {
   name        = "web-backend-service"
   protocol    = "HTTP"
-  port_name   = "https"
+  port_name   = "http"
   timeout_sec = 10
 
   backend {
@@ -50,5 +51,5 @@ resource "google_compute_target_http_proxy" "default" {
 resource "google_compute_global_forwarding_rule" "default" {
   name       = "web-forwarding-rule"
   target     = google_compute_target_http_proxy.default.id
-  port_range = "443"
+  port_range = "80"
 }

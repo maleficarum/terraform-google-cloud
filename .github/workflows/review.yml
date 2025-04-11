@@ -30,7 +30,7 @@ jobs:
                 fetch-depth: 0   
                 
             - name: Create SSL files
-              run: echo $ssl_key > resources/private.key && echo $ssl_cert > resources/certificate.crt
+              run: echo $ssl_key > ${GITHUB_WORKSPACE}/modules/compute/resources/private.key && echo $ssl_cert > ${GITHUB_WORKSPACE}/modules/compute/resources/certificate.crt
               shell: bash
 
             - name: Echo environment

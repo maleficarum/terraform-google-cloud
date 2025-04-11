@@ -7,11 +7,12 @@ resource "google_compute_instance_group" "private_group" {
     name = "http"
     port = "80"
   }
-
+/*
   named_port {
     name = "https"
     port = "443"
   }
+*/
 
   lifecycle {
     create_before_destroy = true
@@ -23,6 +24,7 @@ resource "google_compute_http_health_check" "default" {
   request_path       = "/"
   check_interval_sec = 60
   timeout_sec        = 5
+  port = 80
 }
 
 resource "google_compute_backend_service" "default" {
@@ -48,8 +50,37 @@ resource "google_compute_target_http_proxy" "default" {
   url_map = google_compute_url_map.default.id
 }
 
+/*
 resource "google_compute_global_forwarding_rule" "default" {
   name       = "web-forwarding-rule"
   target     = google_compute_target_http_proxy.default.id
   port_range = "80"
+}
+*/
+
+resource "google_compute_global_forwarding_rule" "default" {
+  name       = "https-forwarding-rule"
+  target     = google_compute_target_https_proxy.default.id
+  port_range = "443"
+}
+
+resource "google_compute_ssl_certificate" "default" {
+  name_prefix = "ss-cert"
+  description = "Self Signed Certificate"
+  private_key = file("resources/private.key")
+  certificate = file("resources/certificate.crt")
+
+  lifecycle {
+    create_before_destroy = true
+    ignore_changes = [private_key, certificate]   
+  }
+}
+
+resource "google_compute_target_https_proxy" "default" {
+  name             = "https-lb-proxy"
+  url_map          = google_compute_url_map.default.id
+  ssl_certificates = [google_compute_ssl_certificate.default.id]
+  
+  # Optional: Enable HTTP/3 (QUIC)
+  quic_override = "ENABLE"
 }

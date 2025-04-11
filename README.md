@@ -125,10 +125,15 @@ network_name = "prod-vpc"
 
 ## SSL
 
+### Complete Workflow
+
+- SSL Termination: Client HTTPS requests terminate at the load balancer
+- Proxy Handling: target_https_proxy decrypts traffic
+- Routing: url_map directs traffic to appropriate backend
+- Internal Traffic: Backend services receive unencrypted HTTP traffic
+
 ```
-openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 \
-  -nodes -keyout example.com.key -out example.com.crt -subj "/CN=example.com" \
-  -addext "subjectAltName=DNS:example.com,DNS:*.example.com"
+openssl req -x509 -nodes -days 365 -newkey rsa:2048   -keyout private.key -out certificate.crt   -subj "/CN=yourdomain.com"   -addext "subjectAltName=DNS:yourdomain.com,DNS:www.yourdomain.com"  
 ```
 
 ## 💥 Destroy Resources

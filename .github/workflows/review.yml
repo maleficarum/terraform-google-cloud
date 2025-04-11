@@ -1,7 +1,9 @@
 name: On Push Request
 env:
   TF_VAR_service_account:  ${{ secrets.SERVICE_ACCOUNT }}
-  TF_VAR_project: ${{secrets.GCP_PROJECT }}
+  TF_VAR_project: ${{ secrets.GCP_PROJECT }}
+  ssl_cert: ${{ secrets.SSL_CERT }} 
+  ssl_key: ${{ secrets.SSL_KEY }}
   environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
 
 on:
@@ -25,7 +27,11 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v4
               with:
-                fetch-depth: 0            
+                fetch-depth: 0   
+                
+            - name: Create SSL files
+              run: echo $ssl_key > ${GITHUB_WORKSPACE}/modules/compute/resources/private.key && echo $ssl_cert > ${GITHUB_WORKSPACE}/modules/compute/resources/certificate.crt
+              shell: bash
 
             - name: Echo environment
               run: echo "Using environment [${environment}]"

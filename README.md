@@ -1,4 +1,8 @@
+<!-- <INSTANCE_NAME>.<ZONE>.c.<PROJECT_ID>.internal -->
 # terraform-google-cloud
+
+![GitHub Release](https://img.shields.io/github/v/release/maleficarum/terraform-google-cloud)
+
  
 # Google Cloud Terraform Project ☁️
 
@@ -10,7 +14,8 @@ This Terraform project automates the provisioning and management of Google Cloud
 3. [Setup & Deployment](#-setup--deployment)
 4. [Available Modules](#-available-modules)
 5. [Customization](#-customization)
-6. [Destroy Resources](#-destroy-resources)
+6. [SSL] (#-ssl)
+7. [Destroy Resources](#-destroy-resources)
 
 ## 🚀 Project Overview
 This repository contains Terraform configurations for deploying GCP resources, including:
@@ -116,6 +121,14 @@ project_id = "your-project-id"
 region = "us-central1"
 machine_type = "e2-medium"
 network_name = "prod-vpc"
+```
+
+## SSL
+
+```
+openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 \
+  -nodes -keyout example.com.key -out example.com.crt -subj "/CN=example.com" \
+  -addext "subjectAltName=DNS:example.com,DNS:*.example.com"
 ```
 
 ## 💥 Destroy Resources
